@@ -12,6 +12,9 @@ class SpectraFilter:
         self.process_mzml_directory(unmatched_spectra)
 
     def get_unmatched_spectra(self):
+        """
+        get a list of spectra that didn't match to any peptide sequence
+        """
         raw_df = MSRaw.read_mzml(self.mzml_dir)
         msms_df = pd.read_csv(self.msms_file, sep='\t', index_col=False, header=0)
         msms_df.rename(columns={'Scan number': 'SCAN_NUMBER'}, inplace=True)
@@ -24,6 +27,9 @@ class SpectraFilter:
         return unmatched_spectra
 
     def process_mzml_directory(self, unmatched_spectra):
+        """
+        iterate over all mzml files in the given directory
+        """
         path = Path(self.mzml_dir)
         mzml_files = path.glob("*.mzML")
         for mzml_file in mzml_files:
@@ -32,6 +38,9 @@ class SpectraFilter:
 
     @staticmethod
     def remove_spectra(mzml_file, unmatched_file, unmatched_spectra):
+    """
+    take mzml file and return a new file with the unmatched spectra
+    """
         with open(mzml_file, 'r') as file:
             lines = file.readlines()
 
