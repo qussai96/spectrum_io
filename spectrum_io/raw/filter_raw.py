@@ -1,10 +1,6 @@
 from spectrum_io.raw.msraw import MSRaw
 import pandas as pd
 from pathlib import Path
-import sys
-
-import pandas as pd
-from pathlib import Path
 
 class SpectraFilter:
     def __init__(self, mzml_dir, msms_file):
